@@ -7,7 +7,7 @@ import pandas as pd
 import matplotlib as plt
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-import ast
+import json
 
 
 # In[21]:
@@ -48,7 +48,7 @@ st.title("Plots and Scores Dashboard")
 signal_id = st.selectbox('Select a Signal ID', list(df["user_id"]),key="signal_id_p")
 
 if st.button("Generate Plots and Model Response",key="plot_button"):
-    signal_input = ast.literal_eval(df[df["user_id"] == signal_id]["signal"].values[0])
+    signal_input = json.loads(df[df["user_id"] == signal_id]["signal"].values[0])
 #     plot_path = df[df["user_id"] == signal_id]["plots"][0]
     score_dict = eval(df[df["user_id"] == signal_id]["response"].values[0])
 
