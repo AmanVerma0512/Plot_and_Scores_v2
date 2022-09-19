@@ -18,6 +18,17 @@ import ast
 scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',
              "https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 
+cred = {
+  "type": type_s,
+  "project_id": project_id_s,
+  "private_key_id": private_key_id_s,
+  "private_key": private_key_s,
+  "client_email": client_email_s,
+  "client_id": client_id_s,
+  "auth_uri": auth_uri_s,
+  "token_uri": token_uri_s,
+  "auth_provider_x509_cert_url": auth_provider_x509_cert_url_s,
+  "client_x509_cert_url": client_x509_cert_url_s}
 credentials = ServiceAccountCredentials.from_json_keyfile_dict(cred, scope)
 
 client = gspread.authorize(credentials)
