@@ -1,7 +1,6 @@
 streamlit
 pandas
 matplotlib
-json
 gspread
 oauth2client
 
