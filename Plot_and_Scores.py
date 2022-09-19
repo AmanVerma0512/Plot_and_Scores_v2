@@ -18,16 +18,16 @@ scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/aut
              "https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 
 cred = {
-  "type": type_s,
-  "project_id": project_id_s,
-  "private_key_id": private_key_id_s,
-  "private_key": private_key_s,
-  "client_email": client_email_s,
-  "client_id": client_id_s,
-  "auth_uri": auth_uri_s,
-  "token_uri": token_uri_s,
-  "auth_provider_x509_cert_url": auth_provider_x509_cert_url_s,
-  "client_x509_cert_url": client_x509_cert_url_s}
+  "type": st.secrets["type_s"],
+  "project_id": st.secrets["project_id_s"],
+  "private_key_id": st.secrets["private_key_id_s"],
+  "private_key": st.secrets["private_key_s"],
+  "client_email": st.secrets["client_email_s"],
+  "client_id": st.secrets["client_id_s"],
+  "auth_uri": st.secrets["auth_uri_s"],
+  "token_uri": st.secrets["token_uri_s"],
+  "auth_provider_x509_cert_url": st.secrets["auth_provider_x509_cert_url_s"],
+  "client_x509_cert_url": st.secrets["client_x509_cert_url_s"]}
 credentials = ServiceAccountCredentials.from_json_keyfile_dict(cred, scope)
 
 client = gspread.authorize(credentials)
