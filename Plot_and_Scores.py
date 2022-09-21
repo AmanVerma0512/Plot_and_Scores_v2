@@ -1,18 +1,20 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[20]:
-import streamlit as st
+from Plot_helper import FormScore,Scoring
 import pandas as pd
-import matplotlib as plt
+import matplotlib.pyplot as plt
+import streamlit as st
+import numpy as np
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import json
 
+class Interface():
+    def __init__(self,h_params, y,log_dir=r"TestDir/"):
+        plot_dir = log_dir + "plots/"
+        self.fs=FormScore(y,plot_dir=plot_dir)
+        self.fs.h_params=h_params
+        response=Scoring(self.fs, "rep_and_threshold").scores()
 
 # In[21]:
-
-
 
 scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',
              "https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
@@ -49,24 +51,11 @@ signal_id = st.selectbox('Select a Signal ID', list(df["user_id"]),key="signal_i
 
 if st.button("Generate Plots and Model Response",key="plot_button"):
     signal_input = json.loads(df[df["user_id"] == signal_id]["signal"].values[0])
-#     plot_path = df[df["user_id"] == signal_id]["plots"][0]
     score_dict = eval(df[df["user_id"] == signal_id]["response"].values[0])
+    h_p = eval(df[df["user_id"] == signal_id]["h_params"].values[0])
+    st.header("Plots for Signal ID: " + str(signal_id))
+    Interface(h_p, signal_input)
 
-#    st.header("Plots for Signal ID: " + str(signal_id))
-#     plot_peaks = Image.open(plot_path+"peaks.png")
-#     st.image(plot_peaks, caption='Plot indicating peaks signal for signal ID ' + str(signal_id))
-
-#     plot_peaks_tempo = Image.open(plot_path+"peaks&tempo.png")
-#     st.image(plot_peaks_tempo, caption='Plot indicating peaks & Tempo signal for signal ID ' + str(signal_id))
-
-#     plot_jitter = Image.open(plot_path+"jitter.png")
-#     st.image(plot_jitter, caption='Plot indicating jitter signal for signal ID ' + str(signal_id))
-
-#     plot_smooth_blips = Image.open(plot_path+"smooth-blips.png")
-#     st.image(plot_smooth_blips, caption='Plot indicating smooth blips signal for signal ID ' + str(signal_id))
-
-#     plot_sudden_release = Image.open(plot_path+"sudden-release.png")
-#     st.image(plot_sudden_release, caption='Plot indicating sudden release signal for signal ID ' + str(signal_id))
 
 
     st.header("Model Scores for Signal ID: " + str(signal_id))
