@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 import json
 import statistics
 import streamlit as st
+from scipy.signal import find_peaks
+
 
 print_flag = 0
 plot_flag = 1
