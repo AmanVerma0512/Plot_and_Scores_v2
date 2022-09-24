@@ -50,6 +50,8 @@ st.title("Plots and Scores Dashboard")
 signal_id = st.selectbox('Select a Signal ID', list(df["user_id"]),key="signal_id_p")
 
 if st.button("Generate Plots and Model Response",key="plot_button"):
+    
+    st.write("Description for Selected Signal: " + df[df["user_id"] == signal_id]["Desc"].values[0])
     signal_input = json.loads(df[df["user_id"] == signal_id]["signal"].values[0])
     score_dict = eval(df[df["user_id"] == signal_id]["response"].values[0])
     h_p = eval(df[df["user_id"] == signal_id]["h_params"].values[0])
