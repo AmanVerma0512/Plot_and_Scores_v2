@@ -13,6 +13,7 @@ class Interface():
         self.fs=FormScore(y,plot_dir=plot_dir)
         self.fs.h_params=h_params
         response=Scoring(self.fs, "rep_and_threshold").scores()
+        st.write("Response")
 
 # In[21]:
 
