@@ -16,6 +16,7 @@ class Interface():
 
 # In[21]:
 
+
 scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',
              "https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 
@@ -51,14 +52,11 @@ signal_id = st.selectbox('Select a Signal ID', list(df["user_id"]),key="signal_i
 
 if st.button("Generate Plots and Model Response",key="plot_button"):
     
-    st.write("Description for Selected Signal: " + df[df["user_id"] == signal_id]["Desc"].values[0])
     signal_input = json.loads(df[df["user_id"] == signal_id]["signal"].values[0])
     score_dict = eval(df[df["user_id"] == signal_id]["response"].values[0])
     h_p = eval(df[df["user_id"] == signal_id]["h_params"].values[0])
     st.header("Plots for Signal ID: " + str(signal_id))
     Interface(h_p, signal_input)
-
-
 
     st.header("Model Scores for Signal ID: " + str(signal_id))
     st.write("Power: " + str(score_dict["power"]))  
@@ -71,3 +69,4 @@ if st.button("Generate Plots and Model Response",key="plot_button"):
     st.write("User Form Score: " + str(score_dict["global_score"]))  
     st.write("Qualitative coaching tip provided by the model:")
     st.write(score_dict['coaching_tip'])
+
